@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+    <form method="post" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        {{ form.name.label }} {{ form.name(size=30, value='{0}'.format( product.name )) }}<br>
+        {{ form.country.label }} {{ form.country(size=30, value='{0}'.format( product.country )) }}<br>
+        {{ form.year.label }} {{ form.year(size=30, value='{0}'.format( product.year )) }}<br>
+        {{ form.price.label }} {{ form.price(size=30, value='{0}'.format( product.price )) }}<br>
+        {{ form.image(class_='file') }}<br>
+        {{ form.sale.label }} {{ form.sale(size=50) }}<br>
+        {{ form.submit() }}<br>
+    </form>
+{% endblock %}

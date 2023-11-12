@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div style="text-align: center;
+                padding: 200px 0;
+                  ">
+        <h2>Login</h2>
+        <p class="col-12"></p>
+        <form method="post">
+            {{ form.hidden_tag() }}
+            <span class="fs-4 fw-bold text-black">Enter your name:</span><br> {{ form.name(size=50) }}<br>
+            <span class="fs-4 fw-bold text-black">Enter your password:</span><br>{{ form.password(size=50) }}<br>
+            <span class="fs-4 fw-bold text-black">Remember Me?:</span>{{ form.remember_me(size=30) }}<br>
+            <p class="col-12"></p>
+            {{ form.submit(class='btn1') }}
+        </form>
+        <p class="col-12"></p>
+        <a href="/registration" class="btn btn-outline-warning">Registration</a>
+    </div>
+{% endblock %}

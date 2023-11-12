@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <p class="col-12"></p>
+            <div style=" left: 0px; top: 70px; background-color: blue; color: white; display:" class="col-2">
+                <form method="post" class="box" name="filter">
+                    <p>Filter by countries:</p>
+                    <input type="checkbox" id="Ukraine" name="Ukraine"> <label style="width: 100px;" for="Ukraine">Ukraine</label><br>
+                    <input type="checkbox" id="USA" name="USA"> <label style="width: 100px;" for="USA">USA</label><br>
+                    <input type="checkbox" id="Japan" name="Japan"> <label style="width: 100px;" for="Japan">Japan</label><br>
+                    <input type="checkbox" id="China" name="China"> <label style="width: 100px;" for="China">China</label><br>
+                    <input type="checkbox" id="German" name="Germany"> <label style="width: 100px;" for="German">German</label><br>
+                    <p>Filter by year</p>
+                    <input type="checkbox" id="Older" name="Older"> <label style="width: 100px;" for="Older">Older</label><br>
+                    <input type="checkbox" id="2021" name="2021"> <label style="width: 100px;" for="2021">2021</label><br>
+                    <input type="checkbox" id="2022" name="2022"> <label style="width: 100px;" for="2022">2022</label><br>
+                    <input type="checkbox" id="2023" name="2023"> <label style="width: 100px;" for="2023">2023</label><br>
+                    <input type="checkbox" id="New" name="New"> <label style="width: 100px;" for="New">New!</label><br>
+                    <input type="submit" value="Search">
+                </form>
+            </div>
+            <div class="container-fluid">
+                <div class="col-10">
+                    {% for i in products %}
+                        <a class="col-2" href="/product/{{ i.id }}" style="height: 450px; text-decoration: none;">
+                            <div class="box" style=" ">
+                                <img src="{{ i.image }} " height="350" width="250" style="border: 1px solid black;" ><br>
+                                <div style="display: flex;">
+                                    <span class="fs-4 text-black fw-bold">{{ i.name }}</span>
+                                        {% if i.id not in cart %}
+                                            <form method="post" action="/cart/{{ i.id }}" style="width: 100px;">
+                                                <input type="submit" value="Add to cart" class="btn text-white fw-bold">
+                                            </form>
+                                        {% else %}
+                                            <a href="/cart" class="btn text-white fw-bold mx-5" >In cart</a><br>
+                                        {% endif %}
+                                </div>
+                                    {% if current_user.role == 'admin' %}
+                                    <a href="/delete_product/{{ i.id }}" class="btn text-white fw-bold">Delete</a>
+                                    <a href="/product/{{i.id}}/settings" class="btn text-white fw-bold">Change info</a>
+                                {% endif %}
+                            </div>
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+            {% for i in users %}
+                {{ i.name }} <a href="/delete_user/{{ i.id }}">delete</a>
+            {% endfor %}
+    </div>
+</div>
+{% endblock %}

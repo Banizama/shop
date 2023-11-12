@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}<br>
+    <div class="row">
+        <img src="{{ product.image }}" height="735" width="535" class="col-4">
+        <div class="col-8">
+            <p class="col-1"></p>
+            <p class="" style="font-size: 70px;">{{ product.name }}</p>
+            {% if product.sale == False %}
+                <p class="fs-2">{{ product.default_price }}$</p>
+            {% else %}
+            <span class="fs-2">New price</span><span class="fs-2 text-danger">{{ product.default_price }}$</span>
+            {% endif %}
+            {% if product.id in cart %}
+                <a href="/cart">In cart</a>
+            {% else %}
+                <form method="post" action="/buy/{{ product.id }}">
+                    <input type="submit" value="Buy">
+                </form>
+            {% endif %}
+        </div><br>
+            <h1>Comments:</h1>
+            <center>
+                {% if not current_user.is_authenticated %}
+                    <p class="fs-2 text-light">You need to be registered to leave a review</p>
+                    <a href="/login" class="btn btn btn-outline-light">Login</a>
+                {% else %}
+                    <div style="border: 2px black solid;
+                                border-radius: 20px;
+                                width: 800px;">
+                    <form method="post" enctype="multipart/form-data">
+                        {{ form.hidden_tag() }}
+                        <p style="width: 100px;">Advantages:</p>{{ form.advantages(size=100) }}<br>
+                        <p style="width: 100px;">Disadvantages:</p>{{ form.disadvantages(size=100) }}<br>
+                        <p style="width: 100px;">Comment:</p><textarea rows="4" cols="100" name="comment"></textarea>
+                        <p style="width: 100px;">Your name:</p>{{ form.user_name(size=40, value='{0}'.format( current_user.name )) }}<br>
+                        <p style="width: 100px;">Image:</p><input type="file" name="image"><br>
+                        {{ form.submit() }}
+                    </form>
+                    </div>
+                {% endif %}
+            </center>
+
+        {% for i in comments %}
+                    Name: {{ i.user_name }}<br>
+                    Advantages: {{ i.advantages }}<br>
+                    disadvantages: {{ i.disadvantages }}<br>
+                    Comment: {{ i.comment }}<br>
+            {% if current_user.role == 'admin' %}
+                <a href="/delete_comment/{{ i.id }}">Delete</a><br>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}

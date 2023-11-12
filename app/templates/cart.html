@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% if message %}
+            <span class="fw-bold fs-1 text-light">{{ message }},</span><br>
+            <span class="fw-bold fs-3 text-light">But it's never too late to fix it</span><br>
+            <a href="/" class="btn btn-outline-light">Return to home</a>
+    {% else %}
+    {% for i in cart_list %}
+        <img src="{{ i.image }}" height="200px" width="200px">
+    <div style="border-bottom: solid; width: 50%">
+        <span class="fw-bold text-white fs-3">Name: </span><span class="fw-bold text-white fs-3">{{ i.name }}</span>
+        <span class="fw-bold text-white fs-3 mx-5">Price:</span><span class="fw-bold text-white fs-3">{{ i.default_price }}$</span><br>
+    </div>
+    {% endfor %}
+    <span class="fw-bold text-white fs-3">Total:{{ total }}$</span>
+        <form method="post">
+            {{ form.hidden_tag() }}
+            {{ form.submit }}
+        </form>
+    {% endif %}
+
+{% endblock %}

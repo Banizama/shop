@@ -1,0 +1,66 @@
+.box{
+    display: inline-block;
+    position: relative;
+    text-decoration: none;
+
+
+}
+
+#header-input{
+    width: 500px;
+    height: 20px;
+    display: inline-block;
+}
+
+
+.product{
+        position: relative;
+        top: 110px;
+}
+
+.text-block {
+	position: absolute;
+	bottom: 8px;
+	left: 16px;
+}
+
+.img{
+    border-radius: 30px;
+    border: 5px solid #fff;
+    box-shadow: 0 0 10px #444;
+
+}
+
+
+#header_input_block{
+    height: 20px;
+    width: 580px;
+    position: relative;
+    left: 35%;
+    top: 30px;
+}
+
+#filter{
+    height: 100%;
+}
+
+.btn1{
+    color: white;
+    border: 2px solid black;
+    text-decoration: None;
+    border-radius: 10px;
+    padding: 0.2em;
+    color: #696969;
+}
+
+.btn1:hover{
+    background-color: #00010B
+}
+
+body {
+  background: linear-gradient(to left, rgb(78, 84, 200), rgb(143, 148, 251));
+}
+
+.href{
+
+}

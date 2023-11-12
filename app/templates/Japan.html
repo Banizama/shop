@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="row">
+        <p class="col-12"></p>
+            <div style=" left: 0px; top: 70px; background-color: blue; color: white; display:" class="col-2">
+                    <p>Filter by countries:</p>
+                    <a href="/Ukraine" class="btn btn-outline-light">Ukraine</a><br>
+                    <p class="col-12"></p>
+                    <a href="/USA" class="btn btn-outline-light">USA</a><br>
+                    <p class="col-12"></p>
+                    <a href="/China" class="btn btn-outline-light">China</a><br>
+                    <p class="col-12"></p>
+                    <a href="/China" class="btn btn-outline-light">China</a><br>
+                    <p class="col-12"></p>
+                    <a href="/German" class="btn btn-outline-light">German</a><br>
+                    <p>Filter by year</p>
+                    <a href="/Older" class="btn btn-outline-light">Older</a><br>
+                    <p class="col-12"></p>
+                    <a href="/2021" class="btn btn-outline-light">2021</a><br>
+                    <p class="col-12"></p>
+                    <a href="/2022" class="btn btn-outline-light">2022</a><br>
+                    <p class="col-12"></p>
+                    <a href="/2023" class="btn btn-outline-light">2023</a><br>
+                    <p class="col-12"></p>
+                    <a href="/New" class="btn btn-outline-light">New</a><br>
+            </div>
+                <div class="col-10">
+                    {% for i in goods %}
+                        <a class="col-2" href="/product/{{ i.id }}" style="height: 450px; text-decoration: none;">
+                            <div class="box" style=" ">
+                                <img src="{{ i.image }} " height="350" width="250" style="border: 1px solid black;" ><br>
+                                <div>
+                                    <span class="fs-4 text-black fw-bold">{{ i.name }}</span><span class="fs-4 text-black fw-bold mx-5">{{ i.default_price }}$</span><br>
+                                        {% if i.id not in cart %}
+                                            <form method="post" action="/cart/{{ i.id }}" style="width: 100px;">
+                                                <input type="submit" value="Add to cart" class="btn btn-outline-light fw-bold">
+                                            </form>
+                                        {% else %}
+                                            <a href="/cart" class="btn btn-outline-light fw-bold mx-5" >In cart</a><br>
+                                        {% endif %}
+                                </div>
+                                    {% if current_user.role == 'admin' %}
+                                    <a href="/delete_product/{{ i.id }}" class="btn btn-outline-light fw-bold">Delete</a>
+                                    <a href="/product/{{i.id}}/settings" class="btn btn-outline-light fw-bold">Change info</a>
+                                {% endif %}
+                            </div>
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+            {% for i in users %}
+                {{ i.name }} <a href="/delete_user/{{ i.id }}">delete</a>
+            {% endfor %}
+{% endblock %}

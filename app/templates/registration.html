@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div style="text-align: center;
+                padding: 200px 0;
+                  ">
+      <h2>Registration</h2>
+        <p class="col-12"></p>
+        <form method="post">
+          {{ form.hidden_tag() }}
+          <span class="fs-4 fw-bold text-black">Enter your name:</span><br> {{ form.name(size=60) }}<br>
+          <span class='fs-4 fw-bold text-black'>Enter your email:</span><br> {{ form.email(size=60, style='color: white;') }}<br>
+          <span class='fs-4 fw-bold text-black'>Enter your password:</span><br> {{ form.password(size=60, style='color: white;') }}<br>
+          {{ form.submit(class="btn btn-light") }}
+        </form>
+    </div>
+{% endblock %}
